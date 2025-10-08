@@ -1,89 +1,34 @@
-# API de Geolocalização – PWA Example
+# Descubra o País
 
-Este projeto demonstra como consumir a **API de Geolocalização do navegador** dentro de uma aplicação **React + Vite + Tailwind**, configurada como **PWA** (Progressive Web App).
+O **Descubra o País** é um projeto simples que ajuda você a descobrir o país usando **voz** ou **foto**.  
 
----
-
-## 📌 Sobre a API de Geolocalização
-
-A **Geolocation API** é nativa dos navegadores modernos e permite obter a posição atual do usuário (latitude, longitude e precisão).
-
-No código, utilizamos o método:
-
-```javascript
-navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
-```
-
-* **successCallback** → Função chamada ao obter a localização com sucesso.
-* **errorCallback** → Função chamada em caso de erro (ex.: usuário negou permissão).
-* **options** → Parâmetros adicionais (ex.: `enableHighAccuracy`, `timeout`).
+Você pode falar o nome de um país ou enviar uma foto (o nome do arquivo precisa ter o país) e a aplicação mostra o resultado.
 
 ---
 
-## ⚙️ Como funciona neste projeto
+## Tecnologias usadas
 
-No arquivo `src/app.jsx`:
-
-1. O usuário clica em **Obter localização**.
-2. A aplicação chama `navigator.geolocation.getCurrentPosition`.
-3. Se permitido, retorna:
-
-   * Latitude
-   * Longitude
-   * Precisão (em metros)
-4. Esses dados são exibidos na tela e também no mapa do **OpenStreetMap**.
+- Node.js + Express
+- HTML, CSS e JavaScript
+- Web Speech API (para reconhecimento de voz)
 
 ---
 
-## 🚀 Como rodar
+## Como funciona
 
-1. Instale as dependências:
+1. **Detecção por voz:**  
+   Clique no botão 🎤, fale o nome do país e veja o resultado na tela.
 
-   ```bash
-   npm install
-   ```
-2. Inicie o servidor de desenvolvimento:
+2. **Detecção por foto:**  
+   Selecione uma foto com o nome do país no arquivo. A aplicação vai tentar identificar o país.
 
-   ```bash
-   npm run dev
-   ```
-3. Acesse:
-
-   ```
-   http://localhost:5173
-   ```
-
-> ⚠️ A API de Geolocalização só funciona em **HTTPS** (ou em `http://localhost` para desenvolvimento).
+> Nesta versão simples, a foto é analisada apenas pelo **nome do arquivo**.
 
 ---
 
-## 📱 Recursos de PWA incluídos
+## Como rodar
 
-* `manifest.json` → define nome, ícones e cores do app.
-* `service-worker.js` → adiciona cache offline básico.
-* Estrutura compatível com validação do **PWA Builder**.
-
----
-
-## 📊 Exemplo de resposta
-
-Quando o usuário permite acesso à localização, a API retorna um objeto como:
-
-```json
-{
-  "coords": {
-    "latitude": -8.0558,
-    "longitude": -34.8811,
-    "accuracy": 15
-  },
-  "timestamp": 1696432200000
-}
-```
-
----
-
-## 📚 Referências
-
-* [MDN – Geolocation API](https://developer.mozilla.org/pt-BR/docs/Web/API/Geolocation_API)
-* [OpenStreetMap](https://www.openstreetmap.org/)
-* [PWABuilder](https://www.pwabuilder.com/)
+1. Abra o terminal na pasta do projeto.  
+2. Instale as dependências:
+```bash
+npm install
