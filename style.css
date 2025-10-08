@@ -1,0 +1,113 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Corpo da página */
+body {
+  background: linear-gradient(to bottom, #86d2d8, #66a6ff);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  color: #333;
+}
+
+/* Título */
+h1 {
+  color: #fff;
+  font-size: 2.8rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Botões */
+button {
+  background-color: #fff;
+  border: none;
+  padding: 14px 24px;
+  margin: 10px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+}
+
+/* Input de arquivo */
+input[type="file"] {
+  padding: 6px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Área de resultado */
+#result {
+  margin-top: 30px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: transform 0.3s;
+}
+
+#result:hover {
+  transform: scale(1.02);
+}
+
+/* Informações do país */
+#result h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#result p {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #64ffafb1;
+}
+
+/* Bandeira */
+#result img {
+  margin-top: 15px;
+  border-radius: 12px;
+  width: 120px;
+  box-shadow: 0 4px 8px rgba(35, 255, 23, 0.68);
+}
+
+/* Responsividade simples */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  #result {
+    padding: 20px;
+  }
+
+  #result img {
+    width: 90px;
+  }
+}

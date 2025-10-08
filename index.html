@@ -3,18 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CountryFinder</title>
+  <title>Descubra o País</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>CountryFinder</h1>
+  <h1>🌎 Descubra o País</h1>
 
+  <!-- Botão de voz -->
+  <button id="voiceBtn">🎤 Falar o país</button>
+
+  <!-- Upload de foto -->
   <input type="file" id="photoInput" accept="image/*">
-  <button id="uploadBtn">Enviar Foto</button>
-  <br><br>
-  <button id="voiceBtn">🎤 Falar país</button>
+  <button id="uploadBtn">📷 Enviar foto</button>
 
-  <p id="result"></p>
+  <!-- Área de resultado -->
+  <div id="result">
+    <p>Aguardando sua ação...</p>
+  </div>
 
-  <script src="app.js"></script>
+  <script>
+    const result = document.getElementById('result');
+    const voiceBtn = document.getElementById('voiceBtn');
+
+    function displayCountry(data) {
+      if(data.error) {
+        result.innerHTML = `<p>${data.error}</p>`;
+      } else {
+        result.innerHTML = `
+          <h3>${data.name} (${data.officialName})</h3>
+          <p>Capital: ${data.capital}</p>
+          <p>Região: ${data.region}</p>
+          <img src="${data.flag}" alt="Bandeira de ${data.name}">
+        `;
+      }
+    }
+
+    // Voz
+    voiceBtn.addEventListener('click', () => {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'pt-BR';
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        const spokenText = event.results[0][0].transcript;
+
+        fetch("http://localhost:3000/identify/text", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ text: spokenText })
+        })
+        .then(res => res.json())
+        .then(data => displayCountry(data))
+        .catch(err => console.error(err));
+      };
+    });
+
+    // Foto
+    document.getElementById('uploadBtn').addEventListener('click', () => {
+      const fileInput = document.getElementById('photoInput');
+      if(fileInput.files.length === 0) return alert("Escolha uma foto!");
+
+      const fileName = fileInput.files[0].name;
+
+      fetch("http://localhost:3000/identify/image", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ fileName })
+      })
+      .then(res => res.json())
+      .then(data => displayCountry(data))
+      .catch(err => console.error(err));
+    });
+  </script>
 </body>
 </html>
